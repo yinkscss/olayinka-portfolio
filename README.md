@@ -3,7 +3,8 @@
 My personal portfolio website, built for the **Web Technologies – Lab Assessment**.
 It is written by hand in **plain HTML, CSS and vanilla JavaScript** — no frameworks, no build step.
 
-- **Live site:** https://yinkscss.github.io/olayinka-portfolio/
+- **Live site (Vercel):** https://olayinka-portfolio-beta.vercel.app/
+- **GitHub Pages (mirror):** https://yinkscss.github.io/olayinka-portfolio/
 - **Repository:** https://github.com/yinkscss/olayinka-portfolio
 
 ## Sections
