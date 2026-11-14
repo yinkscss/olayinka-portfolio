@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <!-- =========================================================
+       Olayinka Olurotimi-Shittu — Personal Portfolio
+       Plain HTML + CSS + vanilla JavaScript (no framework).
+       Multi-page site: each HTML file is one page; they share
+       the same header, footer, CSS and JavaScript.
+       Web Technologies – Lab Assessment
+       ========================================================= -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Media — Olayinka Olurotimi-Shittu</title>
+  <meta name="description" content="GoodBuildit showreel and a boysod ambient sketch with a live audio visualiser." />
+  <meta name="theme-color" content="#0a0a0b" />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+
+  <!-- Fonts: Inter for headings/body, JetBrains Mono for the terminal-style labels -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Apply the saved theme BEFORE the page paints, so there is no flash of the wrong theme -->
+  <script>
+    (function () {
+      document.documentElement.classList.add('js');
+      var saved = localStorage.getItem('theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
+</head>
+<body>
+  <!-- Thin bar at the very top that fills as the page is scrolled -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <!-- ===================== HEADER / NAVIGATION (same on every page) ===================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="Back to the home page">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">Olayinka<span class="brand-dot">.</span></span>
+      </a>
+
+      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="projects.html" class="nav-link">Projects</a></li>
+          <li><a href="media.html" class="nav-link is-active" aria-current="page">Media</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch to light theme" title="Toggle theme">
+          <span class="theme-icon" aria-hidden="true"></span>
+        </button>
+        <a href="contact.html" class="btn btn-solid btn-sm hide-mobile">Hire me</a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <!-- ===================== MEDIA (video + audio) ===================== -->
+    <section class="section page-start" id="media">
+      <div class="container">
+        <p class="label reveal">Watch &amp; listen <span class="accent">&gt;</span></p>
+        <h1 class="section-title reveal">Showreel and sound.</h1>
+        <p class="page-lede reveal">A vertical product showreel with custom video controls, and an ambient sketch with a live Web Audio frequency visualiser.</p>
+
+        <div class="media-grid">
+          <!-- VIDEO: a vertical product showreel with custom controls written in JavaScript -->
+          <article class="media-card reveal">
+            <div class="video-shell" id="videoShell" tabindex="0" aria-label="GoodBuildit showreel player. Space to play or pause, M to mute, arrow keys to seek.">
+              <video id="showreel" preload="metadata" playsinline poster="assets/media/showreel-poster.jpg">
+                <source src="assets/media/showreel-goodbuildit.mp4" type="video/mp4" />
+                Your browser does not support HTML5 video.
+              </video>
+              <button class="big-play" id="bigPlay" type="button" aria-label="Play showreel">▶</button>
+              <div class="video-controls" role="group" aria-label="Video controls">
+                <button class="ctrl" id="vPlay" type="button" aria-label="Play">▶</button>
+                <div class="progress" id="vProgress" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                  <div class="progress-fill" id="vProgressFill"></div>
+                </div>
+                <span class="time mono-copy" id="vTime">0:00 / 0:00</span>
+                <button class="ctrl" id="vMute" type="button" aria-label="Mute">
+                  <svg class="ico-sound" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M3 9h4l5-4v14l-5-4H3z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                  <svg class="ico-muted" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M3 9h4l5-4v14l-5-4H3z"/><path d="M16 9l6 6M22 9l-6 6" stroke="currentColor" stroke-width="2"/></svg>
+                </button>
+                <button class="ctrl" id="vFull" type="button" aria-label="Full screen">⛶</button>
+              </div>
+            </div>
+            <div class="media-text">
+              <h2>GoodBuildit — games announcement</h2>
+              <p class="mono-copy">A 43-second vertical showreel I made for GoodBuildit, the AI app builder I'm building that publishes apps and games to Celo. Keys: <kbd>Space</kbd> play/pause, <kbd>M</kbd> mute, <kbd>←</kbd>/<kbd>→</kbd> seek 5s.</p>
+              <p class="credit">Music: “Classical vibes 5” by Grigoriy Nuzhny (Mixkit Free License).</p>
+            </div>
+          </article>
+
+          <!-- AUDIO: a custom player with a live frequency visualiser (Web Audio API) -->
+          <article class="media-card audio-card reveal">
+            <div class="audio-head">
+              <p class="label">Now playing <span class="accent">&gt;</span></p>
+              <h2>Studio ambience — a sketch</h2>
+              <p class="mono-copy">I make music as <strong>boysod</strong>. This short loop is a synthesised ambient sketch (made with FFmpeg tone generators for this site, not a boysod release). Press play to see the Web Audio visualiser react.</p>
+            </div>
+            <canvas id="visualiser" class="visualiser" width="600" height="160" aria-label="Audio frequency visualiser" role="img"></canvas>
+            <audio id="ambientAudio" preload="metadata" loop>
+              <source src="assets/media/ambient-sketch.mp3" type="audio/mpeg" />
+            </audio>
+            <div class="audio-controls">
+              <button class="btn btn-solid btn-sm" id="aPlay" type="button">▶ Play</button>
+              <label class="volume mono-copy">VOL
+                <input type="range" id="aVolume" min="0" max="1" step="0.05" value="0.7" aria-label="Volume" />
+              </label>
+              <span class="time mono-copy" id="aTime">0:00</span>
+            </div>
+            <a class="underline mono-copy" href="https://x.com/boysod_" target="_blank" rel="noopener">Follow boysod on X →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER (same on every page) ===================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a href="index.html" class="brand"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Olayinka<span class="brand-dot">.</span></span></a>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="media.html">Media</a><a href="contact.html">Contact</a>
+        <a href="https://github.com/yinkscss" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://x.com/boysod_" target="_blank" rel="noopener">X</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="footer-note mono-copy">© <span id="year"></span> Olayinka Olurotimi-Shittu. Built by hand with HTML, CSS and vanilla JavaScript.</p>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">↑</button>
+
+  <!-- Scripts: data first, then the logic that uses it. "defer" runs them after the HTML is parsed.
+       The same two files are loaded on every page; each feature in main.js starts only if its markup is present. -->
+  <script src="js/data.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

@@ -78,7 +78,7 @@ const PROJECTS = [
   },
   {
     title: 'This portfolio',
-    summary: 'The site you are reading: hand-written HTML, CSS and vanilla JavaScript with canvas art, custom media players and a validated contact form.',
+    summary: 'The site you are reading: a multi-page site in hand-written HTML, CSS and vanilla JavaScript, with canvas art, custom media players and a validated contact form.',
     role: 'Designer & developer',
     stack: ['HTML', 'CSS', 'JavaScript'],
     categories: ['open-source'],

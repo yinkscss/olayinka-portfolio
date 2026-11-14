@@ -4,6 +4,8 @@
   <!-- =========================================================
        Olayinka Olurotimi-Shittu — Personal Portfolio
        Plain HTML + CSS + vanilla JavaScript (no framework).
+       Multi-page site: each HTML file is one page; they share
+       the same header, footer, CSS and JavaScript.
        Web Technologies – Lab Assessment
        ========================================================= -->
   <meta charset="UTF-8" />
@@ -32,23 +34,21 @@
 <body>
   <!-- Thin bar at the very top that fills as the page is scrolled -->
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
-
-  <!-- ===================== HEADER / NAVIGATION ===================== -->
+  <!-- ===================== HEADER / NAVIGATION (same on every page) ===================== -->
   <header class="site-header" id="siteHeader">
     <div class="container header-inner">
-      <a href="#home" class="brand" aria-label="Back to top">
+      <a href="index.html" class="brand" aria-label="Back to the home page">
         <span class="brand-mark" aria-hidden="true"></span>
         <span class="brand-name">Olayinka<span class="brand-dot">.</span></span>
       </a>
 
       <nav class="main-nav" id="mainNav" aria-label="Main navigation">
         <ul class="nav-list">
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#skills" class="nav-link">Skills</a></li>
-          <li><a href="#projects" class="nav-link">Projects</a></li>
-          <li><a href="#experience" class="nav-link">Experience</a></li>
-          <li><a href="#media" class="nav-link">Media</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
+          <li><a href="index.html" class="nav-link is-active" aria-current="page">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="projects.html" class="nav-link">Projects</a></li>
+          <li><a href="media.html" class="nav-link">Media</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
         </ul>
       </nav>
 
@@ -56,14 +56,13 @@
         <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch to light theme" title="Toggle theme">
           <span class="theme-icon" aria-hidden="true"></span>
         </button>
-        <a href="#contact" class="btn btn-solid btn-sm hide-mobile">Hire me</a>
+        <a href="contact.html" class="btn btn-solid btn-sm hide-mobile">Hire me</a>
         <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
   </header>
-
   <main>
     <!-- ===================== HERO ===================== -->
     <section class="hero" id="home">
@@ -89,10 +88,10 @@
             that hand off to a person only when a decision is needed.
           </p>
           <div class="hero-cta reveal">
-            <a href="#projects" class="btn btn-solid">See my work</a>
-            <a href="#contact" class="btn btn-ghost">Get in touch</a>
+            <a href="projects.html" class="btn btn-solid">See my work</a>
+            <a href="contact.html" class="btn btn-ghost">Get in touch</a>
           </div>
-          <p class="hero-note reveal">Short on time? <a href="#media" class="underline">Watch the 43-second showreel</a>.</p>
+          <p class="hero-note reveal">Short on time? <a href="media.html" class="underline">Watch the 43-second showreel</a>.</p>
         </div>
       </div>
 
@@ -109,276 +108,42 @@
       </div>
     </section>
 
-    <!-- ===================== ABOUT ===================== -->
-    <section class="section" id="about">
+    <!-- ===================== SHORT INTRO + HIGHLIGHTS ===================== -->
+    <section class="section" id="intro">
       <div class="container">
         <p class="label reveal">About me <span class="accent">&gt;</span></p>
         <h2 class="section-title reveal">What every project gets.</h2>
-
         <div class="about-intro reveal">
           <p>
             I'm a specialist AI engineer who thinks in systems. I connect CRMs, knowledge bases,
             forms and external APIs into workflows so that multi-step work runs on its own. When a
-            run fails, I read the logs and traces, find the cause, and fix it, then I explain the
-            workflow in plain language to whoever has to use it.
+            run fails, I read the logs and traces, find the cause, and fix it.
           </p>
           <p>
             I studied Mathematics (B.Tech) at the Federal University of Technology, Minna. Outside
             engineering I make music as <strong>boysod</strong>.
+            <a href="about.html" class="underline">More about me, skills and experience →</a>
           </p>
         </div>
 
-        <div class="card-grid two">
-          <article class="feature-card reveal">
-            <div class="feature-text">
-              <h3>Agents that finish the job</h3>
-              <p class="mono-copy">LangGraph agents with intent routing, tool calls and structured outputs. A person steps in only where a decision is required.</p>
-            </div>
-            <div class="feature-art art-rings" aria-hidden="true"></div>
-            <p class="card-tag"><span class="accent">&gt;</span> AGENTS · TOOLS</p>
-          </article>
-          <article class="feature-card reveal">
-            <div class="feature-text">
-              <h3>Context that is actually right</h3>
-              <p class="mono-copy">RAG pipelines (ingest, embed, retrieve) on Pinecone and Weaviate, with citations and confidence handling.</p>
-            </div>
-            <div class="feature-art art-stack" aria-hidden="true"></div>
-            <p class="card-tag"><span class="accent">&gt;</span> RAG · EVALS</p>
-          </article>
-          <article class="feature-card reveal">
-            <div class="feature-text">
-              <h3>Failures I can explain</h3>
-              <p class="mono-copy">I triage live failures from logs, tool traces and latency scripts, fix the contract, and re-verify with query suites.</p>
-            </div>
-            <div class="feature-art art-list" aria-hidden="true"></div>
-            <p class="card-tag"><span class="accent">&gt;</span> TRIAGE · RCA</p>
-          </article>
-          <article class="feature-card reveal">
-            <div class="feature-text">
-              <h3>Apps that ship on-chain</h3>
-              <p class="mono-copy">Solidity and React generated together, deployed from the user's own wallet on Celo through viem. The platform never holds keys.</p>
-            </div>
-            <div class="feature-art art-orbit" aria-hidden="true"></div>
-            <p class="card-tag"><span class="accent">&gt;</span> CELO · STELLAR</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== SKILLS ===================== -->
-    <section class="section" id="skills">
-      <div class="container">
-        <p class="label reveal">Four ways I help <span class="accent">&gt;</span></p>
-        <h2 class="section-title reveal">Skills and tools.</h2>
-        <div class="card-grid four">
-          <article class="skill-card reveal">
-            <h3>AI &amp; Agents</h3>
-            <ul class="chev-list">
-              <li>LangGraph / LangChain</li>
-              <li>Multi-agent orchestration</li>
-              <li>Tool use &amp; structured outputs</li>
-              <li>RAG &amp; context engineering</li>
-            </ul>
-            <p class="skill-meta">Pinecone · Weaviate · OpenRouter</p>
-          </article>
-          <article class="skill-card reveal">
-            <h3>Backend &amp; APIs</h3>
-            <ul class="chev-list">
-              <li>Python / FastAPI</li>
-              <li>REST APIs &amp; webhooks</li>
-              <li>SQL / Postgres</li>
-              <li>Docker &amp; Render deploys</li>
-            </ul>
-            <p class="skill-meta">Logs · traces · RCA</p>
-          </article>
-          <article class="skill-card reveal">
-            <h3>Web &amp; Front end</h3>
-            <ul class="chev-list">
-              <li>HTML, CSS, JavaScript</li>
-              <li>TypeScript / Next.js / React</li>
-              <li>Responsive, accessible UI</li>
-              <li>Plain-language run views</li>
-            </ul>
-            <p class="skill-meta">This site: zero frameworks</p>
-          </article>
-          <article class="skill-card reveal">
-            <h3>Web3 &amp; Automation</h3>
-            <ul class="chev-list">
-              <li>Solidity &amp; viem on Celo</li>
-              <li>Stellar / Soroban open source</li>
-              <li>Zapier, Make, n8n</li>
-              <li>CRM, email &amp; form workflows</li>
-            </ul>
-            <p class="skill-meta">MetaMask · MiniPay · WalletConnect</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== PROJECTS ===================== -->
-    <section class="section" id="projects">
-      <div class="container">
         <p class="label reveal">Selected work <span class="accent">&gt;</span></p>
-        <h2 class="section-title reveal">Projects.</h2>
-
-        <!-- Filter buttons + search. The cards below are generated by JavaScript from an array in js/data.js -->
-        <div class="project-toolbar reveal">
-          <div class="filters" id="projectFilters" role="group" aria-label="Filter projects by category">
-            <button class="filter-btn is-active" data-filter="all" aria-pressed="true">All</button>
-            <button class="filter-btn" data-filter="ai" aria-pressed="false">AI</button>
-            <button class="filter-btn" data-filter="web3" aria-pressed="false">Web3</button>
-            <button class="filter-btn" data-filter="games" aria-pressed="false">Games</button>
-            <button class="filter-btn" data-filter="open-source" aria-pressed="false">Open source</button>
-          </div>
-          <label class="search">
-            <span class="visually-hidden">Search projects</span>
-            <input type="search" id="projectSearch" placeholder="Search projects…" autocomplete="off" />
-          </label>
+        <h2 class="section-title reveal">A few highlights.</h2>
+        <p class="page-lede reveal">Three recent projects. The full list, with category filters and search, is on the projects page.</p>
+        <!-- Cards are generated by JavaScript from the PROJECTS array in js/data.js -->
+        <div class="project-grid" id="highlightGrid"></div>
+        <div class="highlights-foot reveal">
+          <a href="projects.html" class="btn btn-solid">See all projects</a>
         </div>
-        <p class="project-count mono-copy" id="projectCount" aria-live="polite"></p>
-        <div class="project-grid" id="projectGrid"></div>
-      </div>
-    </section>
-
-    <!-- ===================== EXPERIENCE (interactive stepper) ===================== -->
-    <section class="section" id="experience">
-      <div class="container">
-        <p class="label reveal">Experience <span class="accent">&gt;</span></p>
-        <h2 class="section-title center reveal">WHERE I'VE WORKED</h2>
-        <!-- JavaScript builds the dots and fills the panel from the experience array -->
-        <div class="stepper reveal" id="stepper">
-          <div class="stepper-track" id="stepperTrack" role="tablist" aria-label="Roles"></div>
-          <div class="stepper-panel" id="stepperPanel" role="tabpanel" aria-live="polite"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== MEDIA (video + audio) ===================== -->
-    <section class="section" id="media">
-      <div class="container">
-        <p class="label reveal">Watch &amp; listen <span class="accent">&gt;</span></p>
-        <h2 class="section-title reveal">Showreel and sound.</h2>
-
-        <div class="media-grid">
-          <!-- VIDEO: a vertical product showreel with custom controls written in JavaScript -->
-          <article class="media-card reveal">
-            <div class="video-shell" id="videoShell" tabindex="0" aria-label="GoodBuildit showreel player. Space to play or pause, M to mute, arrow keys to seek.">
-              <video id="showreel" preload="metadata" playsinline poster="assets/media/showreel-poster.jpg">
-                <source src="assets/media/showreel-goodbuildit.mp4" type="video/mp4" />
-                Your browser does not support HTML5 video.
-              </video>
-              <button class="big-play" id="bigPlay" type="button" aria-label="Play showreel">▶</button>
-              <div class="video-controls" role="group" aria-label="Video controls">
-                <button class="ctrl" id="vPlay" type="button" aria-label="Play">▶</button>
-                <div class="progress" id="vProgress" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                  <div class="progress-fill" id="vProgressFill"></div>
-                </div>
-                <span class="time mono-copy" id="vTime">0:00 / 0:00</span>
-                <button class="ctrl" id="vMute" type="button" aria-label="Mute">
-                  <svg class="ico-sound" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M3 9h4l5-4v14l-5-4H3z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none"/></svg>
-                  <svg class="ico-muted" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M3 9h4l5-4v14l-5-4H3z"/><path d="M16 9l6 6M22 9l-6 6" stroke="currentColor" stroke-width="2"/></svg>
-                </button>
-                <button class="ctrl" id="vFull" type="button" aria-label="Full screen">⛶</button>
-              </div>
-            </div>
-            <div class="media-text">
-              <h3>GoodBuildit — games announcement</h3>
-              <p class="mono-copy">A 43-second vertical showreel I made for GoodBuildit, the AI app builder I'm building that publishes apps and games to Celo. Keys: <kbd>Space</kbd> play/pause, <kbd>M</kbd> mute, <kbd>←</kbd>/<kbd>→</kbd> seek 5s.</p>
-              <p class="credit">Music: “Classical vibes 5” by Grigoriy Nuzhny (Mixkit Free License).</p>
-            </div>
-          </article>
-
-          <!-- AUDIO: a custom player with a live frequency visualiser (Web Audio API) -->
-          <article class="media-card audio-card reveal">
-            <div class="audio-head">
-              <p class="label">Now playing <span class="accent">&gt;</span></p>
-              <h3>Studio ambience — a sketch</h3>
-              <p class="mono-copy">I make music as <strong>boysod</strong>. This short loop is a synthesised ambient sketch (made with FFmpeg tone generators for this site, not a boysod release). Press play to see the Web Audio visualiser react.</p>
-            </div>
-            <canvas id="visualiser" class="visualiser" width="600" height="160" aria-label="Audio frequency visualiser" role="img"></canvas>
-            <audio id="ambientAudio" preload="metadata" loop>
-              <source src="assets/media/ambient-sketch.mp3" type="audio/mpeg" />
-            </audio>
-            <div class="audio-controls">
-              <button class="btn btn-solid btn-sm" id="aPlay" type="button">▶ Play</button>
-              <label class="volume mono-copy">VOL
-                <input type="range" id="aVolume" min="0" max="1" step="0.05" value="0.7" aria-label="Volume" />
-              </label>
-              <span class="time mono-copy" id="aTime">0:00</span>
-            </div>
-            <a class="underline mono-copy" href="https://x.com/boysod_" target="_blank" rel="noopener">Follow boysod on X →</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== CONTACT ===================== -->
-    <section class="section" id="contact">
-      <div class="container">
-        <h2 class="section-title reveal">Find me. Work with me.</h2>
-        <div class="card-grid two">
-          <article class="paper-card reveal">
-            <div>
-              <h3>Email</h3>
-              <p class="mono-copy">The fastest way to reach me about AI engineering, automation or contract work.</p>
-            </div>
-            <div class="paper-foot">
-              <div>
-                <p class="paper-title">olayinkashittu2003@gmail.com</p>
-                <p class="paper-meta">WRITE · REPLY · BUILD</p>
-              </div>
-              <button class="square-btn" id="copyEmail" type="button" data-email="olayinkashittu2003@gmail.com" aria-label="Copy email address"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 4H6a2 2 0 0 0-2 2v10" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
-            </div>
-          </article>
-          <article class="paper-card reveal">
-            <div>
-              <h3>Elsewhere</h3>
-              <p class="mono-copy">Code on GitHub, updates and music on X.</p>
-            </div>
-            <div class="paper-foot">
-              <div>
-                <p class="paper-title"><a href="https://github.com/yinkscss" target="_blank" rel="noopener">github.com/yinkscss</a></p>
-                <p class="paper-meta"><a href="https://x.com/boysod_" target="_blank" rel="noopener">X · @boysod_</a></p>
-              </div>
-              <a class="square-btn" href="https://github.com/yinkscss" target="_blank" rel="noopener" aria-label="Open GitHub">→</a>
-            </div>
-          </article>
-        </div>
-
-        <!-- Contact form: validated in JavaScript. There is no backend; on success it opens the visitor's email app -->
-        <form class="contact-form reveal" id="contactForm" novalidate>
-          <div class="form-row">
-            <div class="field">
-              <label for="name">Name</label>
-              <input id="name" name="name" type="text" autocomplete="name" />
-              <p class="error" id="nameError" aria-live="polite"></p>
-            </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" autocomplete="email" />
-              <p class="error" id="emailError" aria-live="polite"></p>
-            </div>
-          </div>
-          <div class="field">
-            <label for="message">Message <span class="counter" id="msgCounter">0 / 500</span></label>
-            <textarea id="message" name="message" rows="5" maxlength="500"></textarea>
-            <p class="error" id="messageError" aria-live="polite"></p>
-          </div>
-          <div class="form-foot">
-            <button type="submit" class="btn btn-solid">Send message</button>
-            <p class="form-status mono-copy" id="formStatus" aria-live="polite">No server here: sending opens your own email app with the message filled in.</p>
-          </div>
-        </form>
       </div>
     </section>
   </main>
 
-  <!-- ===================== FOOTER ===================== -->
+  <!-- ===================== FOOTER (same on every page) ===================== -->
   <footer class="site-footer">
     <div class="container footer-inner">
-      <a href="#home" class="brand"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Olayinka<span class="brand-dot">.</span></span></a>
+      <a href="index.html" class="brand"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Olayinka<span class="brand-dot">.</span></span></a>
       <nav class="footer-links" aria-label="Footer">
-        <a href="#about">About</a><a href="#projects">Projects</a><a href="#media">Media</a><a href="#contact">Contact</a>
+        <a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="media.html">Media</a><a href="contact.html">Contact</a>
         <a href="https://github.com/yinkscss" target="_blank" rel="noopener">GitHub</a>
         <a href="https://x.com/boysod_" target="_blank" rel="noopener">X</a>
       </nav>
@@ -390,7 +155,8 @@
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">↑</button>
 
-  <!-- Scripts: data first, then the logic that uses it. "defer" runs them after the HTML is parsed. -->
+  <!-- Scripts: data first, then the logic that uses it. "defer" runs them after the HTML is parsed.
+       The same two files are loaded on every page; each feature in main.js starts only if its markup is present. -->
   <script src="js/data.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>

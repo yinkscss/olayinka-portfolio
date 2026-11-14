@@ -6,6 +6,10 @@
    (initTheme, initMobileNav, ...). At the bottom, one
    DOMContentLoaded listener calls them in order. This keeps
    each feature easy to find, test and explain on its own.
+   The site is multi-page (index, about, projects, media,
+   contact). The same script is included on every page;
+   a feature that needs markup not present on the current
+   page simply returns and does nothing.
    ============================================================= */
 
 'use strict';
@@ -40,6 +44,7 @@ const cssVar = (name) => getComputedStyle(document.documentElement).getPropertyV
 function initTheme() {
   const root = document.documentElement;
   const button = $('#themeToggle');
+  if (!button) return;
 
   // Dark is the default look of the design; a saved choice wins.
   const saved = localStorage.getItem('theme');
@@ -67,6 +72,7 @@ function initTheme() {
 function initMobileNav() {
   const toggle = $('#menuToggle');
   const nav = $('#mainNav');
+  if (!toggle || !nav) return;
 
   const setOpen = (open) => {
     nav.classList.toggle('is-open', open);
@@ -105,25 +111,31 @@ function initSmoothScroll() {
 
 
 /* =============================================================
-   4. ACTIVE LINK HIGHLIGHTING (scroll-spy) with IntersectionObserver
+   4. ACTIVE NAV LINK for the current page
+   (On a single-page site this used IntersectionObserver as a
+   scroll-spy. Now each HTML file is a page, so we highlight the
+   link whose href matches this file. Works on both GitHub Pages
+   — /olayinka-portfolio/about.html — and Vercel — /about.html.)
    ============================================================= */
+function currentPageFile() {
+  // last path segment, e.g. "about.html". Empty or the repo folder name → home.
+  const file = location.pathname.split('/').pop();
+  if (!file || file === 'olayinka-portfolio') return 'index.html';
+  return file;
+}
+
 function initScrollSpy() {
   const links = $$('.nav-link');
-  const sections = links.map((link) => document.querySelector(link.getAttribute('href')));
+  const page = currentPageFile();
 
-  // A section counts as "current" when it crosses a thin band in the middle of the screen.
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      links.forEach((link) => {
-        const isCurrent = link.getAttribute('href') === `#${entry.target.id}`;
-        link.classList.toggle('is-active', isCurrent);
-        if (isCurrent) link.setAttribute('aria-current', 'true'); else link.removeAttribute('aria-current');
-      });
-    });
-  }, { rootMargin: '-45% 0px -50% 0px' });
-
-  sections.forEach((section) => section && observer.observe(section));
+  links.forEach((link) => {
+    const href = link.getAttribute('href') || '';
+    const file = href.split('#')[0] || 'index.html';
+    const isCurrent = file === page;
+    link.classList.toggle('is-active', isCurrent);
+    if (isCurrent) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  });
 }
 
 
@@ -160,6 +172,7 @@ function initScrollEffects() {
   const header = $('#siteHeader');
   const bar = $('#scrollProgress');
   const backToTop = $('#backToTop');
+  if (!header || !bar || !backToTop) return;
   let ticking = false;
 
   function update() {
@@ -189,6 +202,7 @@ function initScrollEffects() {
    ============================================================= */
 function initDitherCanvas() {
   const canvas = $('#ditherCanvas');
+  if (!canvas) return;
   const ctx = canvas.getContext('2d');
   const SIZE = 120;                       // low internal resolution; CSS scales it up crisply
   canvas.width = canvas.height = SIZE;
@@ -265,6 +279,7 @@ function initDitherCanvas() {
    ============================================================= */
 async function initTerminal() {
   const output = $('#terminalText');
+  if (!output) return;
   if (prefersReducedMotion) { output.textContent = TERMINAL_LINES.slice(0, 2).join('\n'); return; }
 
   let index = 0;
@@ -291,6 +306,7 @@ async function initTerminal() {
    ============================================================= */
 function initRoleRotator() {
   const el = $('#roleRotator');
+  if (!el) return;
   let i = 0;
   setInterval(() => {
     el.classList.add('is-out');                 // fade out (CSS transition)
@@ -308,6 +324,7 @@ function initRoleRotator() {
    ============================================================= */
 function initTicker() {
   const rail = $('#tickerRail');
+  if (!rail) return;
   $$('.tick', rail).forEach((tick) => {
     const copy = tick.cloneNode(true);
     copy.setAttribute('aria-hidden', 'true');   // screen readers read the list once
@@ -321,6 +338,7 @@ function initTicker() {
    ============================================================= */
 function initProjects() {
   const grid = $('#projectGrid');
+  const highlightGrid = $('#highlightGrid');
   const count = $('#projectCount');
   const filterBar = $('#projectFilters');
   const search = $('#projectSearch');
@@ -385,6 +403,16 @@ function initProjects() {
     count.textContent = `Showing ${visible.length} of ${PROJECTS.length} projects`;
   }
 
+  // Home page: three featured cards, no filter or search, linking onwards.
+  if (highlightGrid && !grid) {
+    const featured = PROJECTS.filter((p) => ['GoodBuildit', 'StellarRoute', 'Deepscene'].includes(p.title));
+    highlightGrid.replaceChildren(...featured.map(createCard));
+    return;
+  }
+
+  // Projects page only — skip quietly on every other page.
+  if (!grid || !count || !filterBar || !search) return;
+
   // Event delegation on the filter bar: one listener for all buttons.
   filterBar.addEventListener('click', (e) => {
     const btn = e.target.closest('.filter-btn');
@@ -411,6 +439,7 @@ function initProjects() {
 function initExperience() {
   const track = $('#stepperTrack');
   const panel = $('#stepperPanel');
+  if (!track || !panel) return;
   let current = 0;
   let autoTimer = null;
 
@@ -490,6 +519,7 @@ function initShowreel() {
   const progress = $('#vProgress');
   const fill = $('#vProgressFill');
   const time = $('#vTime');
+  if (!shell || !video || !playBtn || !bigPlay || !muteBtn || !fullBtn || !progress || !fill || !time) return;
 
   const togglePlay = () => (video.paused ? video.play() : video.pause());
   playBtn.addEventListener('click', togglePlay);
@@ -500,7 +530,7 @@ function initShowreel() {
   video.addEventListener('play', () => {
     shell.classList.add('is-playing');
     playBtn.textContent = '❚❚'; playBtn.setAttribute('aria-label', 'Pause');
-    const audio = $('#ambientAudio'); if (!audio.paused) audio.pause(); // only one sound at a time
+    const audio = $('#ambientAudio'); if (audio && !audio.paused) audio.pause(); // only one sound at a time
   });
   video.addEventListener('pause', () => {
     shell.classList.remove('is-playing');
@@ -564,6 +594,7 @@ function initAudioPlayer() {
   const volume = $('#aVolume');
   const timeEl = $('#aTime');
   const canvas = $('#visualiser');
+  if (!audio || !playBtn || !volume || !timeEl || !canvas) return;
   const ctx = canvas.getContext('2d');
   let analyser = null;
   let dataArray = null;
@@ -616,7 +647,7 @@ function initAudioPlayer() {
   });
   audio.addEventListener('play', () => {
     playBtn.textContent = '❚❚ Pause';
-    const video = $('#showreel'); if (!video.paused) video.pause(); // only one sound at a time
+    const video = $('#showreel'); if (video && !video.paused) video.pause(); // only one sound at a time
   });
   audio.addEventListener('pause', () => { playBtn.textContent = '▶ Play'; });
   audio.addEventListener('timeupdate', () => { timeEl.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`; });
@@ -638,6 +669,7 @@ function initContactForm() {
   const status = $('#formStatus');
   const message = $('#message');
   const counter = $('#msgCounter');
+  if (!form || !status || !message || !counter) return;
 
   // Each rule: a test function and the error shown when it fails.
   const rules = {
@@ -704,6 +736,7 @@ function initContactForm() {
    ============================================================= */
 function initCopyEmail() {
   const btn = $('#copyEmail');
+  if (!btn) return;
   btn.addEventListener('click', async () => {
     const email = btn.dataset.email;
     try {
@@ -721,12 +754,16 @@ function initCopyEmail() {
    17. FOOTER YEAR (Date object)
    ============================================================= */
 function initYear() {
-  $('#year').textContent = new Date().getFullYear();
+  const el = $('#year');
+  if (el) el.textContent = new Date().getFullYear();
 }
 
 
 /* =============================================================
-   START-UP: run every feature once the HTML is ready
+   START-UP: run every feature once the HTML is ready.
+   The same main.js is loaded on every page. Each init function
+   returns immediately if its markup is not on this page, so
+   unused features stay silent and the console stays clean.
    ============================================================= */
 document.addEventListener('DOMContentLoaded', () => {
   document.documentElement.classList.add('js'); // lets CSS know JavaScript is running
